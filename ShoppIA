@@ -1,0 +1,53 @@
+// ShoppIA - Site de Dropshipping Automatizado
+// Estrutura base com React + Tailwind + Integração com IA + Stripe
+
+import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { ShoppingCart, Search } from "lucide-react";
+import { motion } from "framer-motion";
+
+export default function HomePage() {
+  return (
+    <main className="min-h-screen bg-gray-50 p-6">
+      <header className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold">ShoppIA Produtos</h1>
+        <div className="flex items-center gap-4">
+          <input
+            type="text"
+            placeholder="Buscar produtos..."
+            className="border p-2 rounded-lg w-64"
+          />
+          <Button>
+            <Search className="mr-2 h-4 w-4" /> Buscar
+          </Button>
+          <ShoppingCart className="h-6 w-6" />
+        </div>
+      </header>
+
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {[1, 2, 3, 4, 5, 6].map((item) => (
+          <motion.div
+            key={item}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: item * 0.1 }}
+          >
+            <Card className="rounded-2xl shadow-lg">
+              <CardContent className="p-4">
+                <img
+                  src={`https://source.unsplash.com/300x200/?tech,product,${item}`}
+                  alt="Produto"
+                  className="w-full rounded-xl"
+                />
+                <h2 className="text-lg font-semibold mt-2">Produto {item}</h2>
+                <p className="text-sm text-gray-600">Descrição curta do produto {item}.</p>
+                <Button className="mt-4 w-full">Comprar</Button>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ))}
+      </section>
+    </main>
+  );
+}
